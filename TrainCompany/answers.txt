@@ -1,0 +1,181 @@
+14.)
+
+(a) TrainCompany is able to have multiple constructors due to a feature in OOP which is called method overloading.
+This allows different methods to be called by the amount and type of parameters.
+
+(b) The consequence of having the accessor and mutator methods declared as protected is that all instances of this
+class in the package will be able to run the methods, as well as classes that subclass TrainCompany.
+
+15.)
+
+(a) RouteCode would be good as a string, as it requires a certain amount of characters to represent an ID. Delay
+would be good as an Integer, as it would contain whole, non-decimal numbers. WeatherRelated is better as a boolean
+which represents true or false quite directly.
+
+(b)
+
+public Journey(String routeCode, int delay, boolean weatherRelated) {
+
+    this.routeCode = routeCode;
+    this.delay = delay;
+    this.weatherRelated = weatherRelated;
+
+}
+
+(c) "T290", 10, 1
+
+
+
+16.)
+
+(a) 5
+
+(b)
+
+    public double averageDelay() {
+        double totalJourneyDelay = 0;
+        double totalJourneyCount = 0;
+        for (int i = 0; i < numberOfJourneys; i++) {
+            if ( !journeyHistory[i].getWeatherRelated()  ) {
+                totalJourneyDelay += journeyHistory[i].getDelay();
+                totalJourneyCount += 1;
+            }
+        }
+
+        return totalJourneyDelay/totalJourneyCount;
+    }
+
+17.)
+
+(a) N/A
+
+(b)
+
+    public String longestDelay(Codes[] c) {
+
+        int minDelay = 0;
+        Journey minDelayJourney = null;
+        for (Journey journey : journeyHistory ) {
+            if (journey.getDelay() < minDelay && journey.getWeatherRelated() == false ) {
+                minDelay = journey.getDelay();
+                minDelayJourney = journey;
+            }
+        }
+
+        for (Codes code : c) {
+            if ( minDelayJourney.getRouteCode() == code.getRouteCode() ) {
+                return code.getRouteName();
+            }
+        }
+        return "";
+    }
+
+
+18.)
+
+(a)
+  Inheritance could be used to subclass certain classes such as Journey and Codes where Journey
+  could possibly inherit parts of Codes and take that data to make it more organized.
+
+(b)
+
+  (ii) Keeping dependencies to a minimum is important when building code that isn't complicated.
+  Dependencies stem from the word 'dependent' where the user relies on function calls that are
+  offered from a framework. Using too many of these clutters the app where more concise code could
+  be used.
+
+
+19.)
+
+(a)
+  We are creating an array with a huge amount of values which is going to be filled with null objects.
+  If we loop through this data it will prove to be quite difficult to make it efficient. It should be
+  replaced with an ArrayList to make it better.
+
+17.)
+
+(a) N/A
+
+(b)
+
+public String longestDelay() {
+
+  int minDelay = 0;
+  Journey minDelayJourney;
+  for (Journey journey : journeyHistory ) {
+    if (journey.getDelay() < minDelay && journey.getWeatherRelated() == false ) {
+      minDelay = journey.getDelay()
+      minDelayJourney = journey;
+    }
+  }
+
+  for (Codes code : allCodes) {
+    if ( minDelayJourney.getRouteCode() == code.getRouteCode() ) {
+      return code.getRouteName()
+    }
+  }
+
+}
+
+
+18.)
+
+(a)
+  Inheritance could be used to subclass certain classes such as Journey and Codes where Journey
+  could possibly inherit parts of Codes and take that data to make it more organized.
+
+(b)
+
+  (ii) Keeping dependencies to a minimum is important when building code that isn't complicated.
+  Dependencies stem from the word 'dependent' where the user relies on function calls that are
+  offered from a framework. Using too many of these clutters the app where more concise code could
+  be used.
+
+
+19.)
+
+(a)
+  We are creating an array with a huge amount of values which is going to be filled with null objects.
+  If we loop through this data it will prove to be quite difficult to make it efficient. It should be
+  replaced with an ArrayList to make it better.
+
+
+(b)
+  We can address this in two ways. We can create an arrayList to limit the amount of entries in the
+  array. Secondly, we can create a HashMap which would arrange the entries by key value pair where
+  we could simply enter the key, such as the journey number, and get the value which could be a journey.
+
+
+
+20.)
+
+  (a)
+    A programmer could use methods of an ADT without knowing how they are implemented by calling them
+    on an instance of their class. They are already built into the ADT.
+
+  (b)
+    A LinkedList could prove useful in this scenario by connecting values in the array to upcoming values
+    this would help with journeys sorted in an almost chronological order.
+
+  (c)
+
+    public ArrayList convert(Codes[] allCodes) {
+
+        Boolean allowEntry = true;
+        ArrayList<Codes> noDuplicates = new ArrayList<Codes>();
+
+        for (Codes possibleDuplicate : allCodes ) {
+
+            for (Codes nonDuplicate : noDuplicates ) {
+                if ( nonDuplicate.getRouteCode() == possibleDuplicate.getRouteCode() ) {
+                    allowEntry = false;
+                }
+            }
+            if (allowEntry == true) {
+                noDuplicates.add(possibleDuplicate);
+            }
+            allowEntry = true;
+
+        }
+        return noDuplicates;
+    }
